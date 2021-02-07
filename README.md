@@ -1,6 +1,6 @@
 # mikrotik-ansible
 
-Gives you a possibility to distribute your ssh key on any Mikrotk device reached via network. 
+Gives you a possibility to distribute your ssh key on any Mikrotik device reached via a network. 
 
 Pre-requirements:
 
