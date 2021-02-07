@@ -1,17 +1,21 @@
 - name: RouterOS test with network_cli connection
   hosts: routers
   gather_facts: false
-  tasks:
   
-  # Run a command and print its output
+  vars:
+     var_USER: "{{ lookup('env','USER') }}"
+     id_rsa_pub_var: "{{ lookup('file', '/home/{{ var_USER }}/.ssh/id_rsa.pub') }}"    
+  tasks:  
+
   - community.routeros.command:
       commands:
-        - /system resource print
-    register: system_resource_print
-  - debug:
-      var: system_resource_print.stdout_lines
+        - /file print file=id.rsa.pub; /file set "id.rsa.pub" contents="{{ id_rsa_pub_var }}"
+    register: id_rsa_pub_var_set   
+  
+  - community.routeros.command:
+      commands:
+        - /user ssh-keys import user="{{ ansible_user }}" public-key-file=id.rsa.pub
 
-  # Retrieve facts
-  - community.routeros.facts:
-  - debug:
-      msg: "First IP address: {{ ansible_net_all_ipv4_addresses[0] }}"
+  - community.routeros.command:
+      commands:
+        - /file remove id.rsa.pub
