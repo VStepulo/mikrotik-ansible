@@ -5,8 +5,8 @@
   vars:
      var_USER: "{{ lookup('env','USER') }}"
      id_rsa_pub_var: "{{ lookup('file', '/home/{{ var_USER }}/.ssh/id_rsa.pub') }}"    
+  
   tasks:  
-
   - community.routeros.command:
       commands:
         - /file print file=id.rsa.pub; /file set "id.rsa.pub" contents="{{ id_rsa_pub_var }}"
