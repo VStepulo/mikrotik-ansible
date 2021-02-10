@@ -18,3 +18,9 @@ Pre-requirements:
 Run playbook by command:
 	
 	user@Ubuntu:~/mikrotik-ansible$ ansible-playbook play.yml
+	
+	
+TODO:
+
+Creating backups.
+Update version.
